@@ -1,5 +1,7 @@
 # Live Creator Challenge 4 - Hyper Casual Game
 
+![](frogger-like.gif)  
+
 A Frogger-like targeting mobile devices.
 
 ## Assets
