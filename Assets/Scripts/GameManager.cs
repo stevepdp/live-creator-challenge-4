@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void GameOver() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    public void GameOver() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     public void NextLevel()
     {

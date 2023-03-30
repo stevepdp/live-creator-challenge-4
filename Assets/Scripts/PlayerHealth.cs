@@ -6,11 +6,15 @@ public class PlayerHealth : MonoBehaviour
     public static event Action OnPlayerDead;
 
     [SerializeField] int hp = 1;
-    
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("Hit");
             DeductHP();
+        }
+            
     }
 
     void DeductHP()
