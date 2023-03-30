@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static event Action<int> OnLevelChange;
+    public static event Action<int> OnScoreChange;
+
+    int level = 1;
+    int score = 0;
+    int levelCompleteReward = 1000;
+
+    void OnEnable()
+    {
+        PlayerHealth.OnPlayerDead += GameOver;
+    }
+
+    void OnDisable()
+    {
+        PlayerHealth.OnPlayerDead -= GameOver;
+    }
+
     void Awake()
     {
         EnforceSingleInstance();
@@ -33,5 +51,21 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+    }
+
+    void GameOver() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    public void NextLevel()
+    {
+        score += levelCompleteReward;
+        OnScoreChange?.Invoke(score);
+
+        level++;
+        OnLevelChange?.Invoke(level);
+    }
+
+    void UpdateScore()
+    {
+        OnScoreChange?.Invoke(score);
     }
 }
