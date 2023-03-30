@@ -53,7 +53,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void GameOver() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    public void GameOver()
+    {
+        score = 0;
+        level = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void NextLevel()
     {
